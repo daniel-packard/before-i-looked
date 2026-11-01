@@ -38,5 +38,12 @@ export function createApp(config: RigConfig = loadConfig()) {
     );
   });
 
+  // Same rows as the digest page (readNight, sorted by job), as JSON for agents.
+  app.get('/api/digest/:night', (c) => {
+    const night = readNight(config.runsDir, c.req.param('night'));
+    if (!night) return c.json({ error: 'no such night' }, 404);
+    return c.json(night);
+  });
+
   return app;
 }
