@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-10-31
 ---
 
 # Morning digest
@@ -77,3 +78,17 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Issue | Blocked by | Worker | Closed |
+|---|-------|-----------|--------|--------|
+| 1 | Run log reader | — | claude-code · opus-5.5 · high | 2026-10-31 |
+| 2 | Digest page | #1 (types.ts) | claude-code · sonnet-5.5 · medium | 2026-10-31 |
+| 3 | Digest JSON | #1 (types.ts) | claude-code · sonnet-5.5 · medium | 2026-10-31 |
+| 4 | Board links | #1 (types.ts) | claude-code · sonnet-5.5 · medium | 2026-10-31 |
+| 5 | Route tests | #1, #2, #3 | claude-code · sonnet-5.5 · medium | 2026-10-31 |
+| 6 | Preview for review | #1–#5 | claude-code · opus-5.5 · high | 2026-10-31 |
+| 7 | Clean up | #6, review | claude-code · opus-5.5 · high | 2026-10-31 |
+
+#6 was first closed when the link was sent, before the reviewer looked; reopened and closed again once the review was in. The marked Surge revision was discarded; the link now serves the page with no marker.
