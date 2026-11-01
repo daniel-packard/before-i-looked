@@ -18,11 +18,18 @@ export function StatusBoard({ status }: { status: Status }) {
       {status.nights.length === 0 ? (
         <p class="mute">nothing in runs/</p>
       ) : (
-        <ul>
-          {status.nights.map((n) => (
-            <li>{n}</li>
-          ))}
-        </ul>
+        <table>
+          <tbody>
+            {status.nights.map(({ night, counts }) => (
+              <tr>
+                <td><a href={`/digest/${night}`}>{night}</a></td>
+                <td>ok {counts?.ok ?? '—'}</td>
+                <td>retry {counts?.retry ?? '—'}</td>
+                <td class={counts && counts.fail > 0 ? 'warn' : undefined}>fail {counts?.fail ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </>
   );
