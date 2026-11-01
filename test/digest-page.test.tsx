@@ -36,6 +36,16 @@ describe('GET /digest/:night', () => {
       expect(await res.text()).toContain('nothing ran');
     });
 
+    it('a bad line is noted under the table and the good rows still render', async () => {
+      const good = JSON.stringify({ at: '2026-01-03T01:00:00+01:00', job: 'a', status: 'ok', owner: 'x' });
+      writeFileSync(join(dir, '2026-01-03.jsonl'), `${good}\nnot json\n`);
+      const res = await app.request('/digest/2026-01-03');
+      const html = await res.text();
+      expect(res.status).toBe(200);
+      expect(html).toContain('data-job="a"');
+      expect(html).toContain('1 unreadable line(s) skipped');
+    });
+
     it('marks 3 retries but not 2, and shows a missing owner as a dash', async () => {
       const line = (job: string, status: string) =>
         JSON.stringify({ at: '2026-01-02T01:00:00+01:00', job, status, owner: null });
